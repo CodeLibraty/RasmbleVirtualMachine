@@ -1,0 +1,25 @@
+.macro for_range(var, start, end)
+    push $start
+    store $var
+    .label loop_start
+    load $var
+    push $end
+    lt
+    jz loop_end
+    # тело цикла будет здесь
+    load $var
+    push 1
+    add
+    store $var
+    jmp loop_start
+    .label loop_end
+.end macro
+
+.macro while(condition)
+    .label while_start
+    $condition
+    jz while_end
+    # тело цикла будет здесь
+    jmp while_start
+    .label while_end
+.end macro
